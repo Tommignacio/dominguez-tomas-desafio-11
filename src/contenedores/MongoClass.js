@@ -2,6 +2,7 @@ import moment from "moment";
 import mongoose from "mongoose";
 import config from "../config.js";
 
+//conecta a DB mongo atlas
 mongoose.connect(config.mongoDB.URL, config.mongoDB.options);
 
 class MongoClass {

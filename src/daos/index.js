@@ -2,9 +2,10 @@
 Elige cual daos importar dependiendo la base de datos a utilizar
 */
 import dotenv from 'dotenv';
+
 dotenv.config();
-let productsDao;
-let cartsDao;
+let productsDao, cartsDao, authorsDao
+
 
 switch (process.env.DB_NAME) {
     case 'mongoDB':
@@ -16,15 +17,9 @@ switch (process.env.DB_NAME) {
             .then(({ MongoDBCarts }) => {
                 cartsDao = new MongoDBCarts();
             })
-        break;
-    case 'firebase':
-        import('./products/FirebaseProducts.js')
-            .then(({ FirebaseProducts }) => {
-                productsDao = new FirebaseProducts();
-            })
-        import('./carts/FirebaseCarts.js')
-            .then(({ FirebaseCarts }) => {
-                cartsDao = new FirebaseCarts();
+        import('./chats/mongoDBAuthors.js')
+            .then(({ MongoDBAuthors }) => {
+                authorsDao = new MongoDBAuthors();
             })
         break;
     default:
@@ -32,4 +27,4 @@ switch (process.env.DB_NAME) {
 
 }
 
-export { productsDao, cartsDao };
+export { productsDao, cartsDao, authorsDao };
