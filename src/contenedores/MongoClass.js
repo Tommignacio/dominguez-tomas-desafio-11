@@ -1,4 +1,3 @@
-import moment from "moment";
 import mongoose from "mongoose";
 import config from "../config.js";
 
@@ -13,7 +12,6 @@ class MongoClass {
     //crea nuevo documento
     async create(doc) {
         try {
-            doc.timestamp = `${moment().format('L')} ${moment().format('LTS')}`;
             const newDoc = await this.collection.create(doc)
             return newDoc
         } catch (err) {

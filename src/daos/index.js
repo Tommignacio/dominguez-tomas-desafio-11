@@ -4,7 +4,7 @@ Elige cual daos importar dependiendo la base de datos a utilizar
 import dotenv from 'dotenv';
 
 dotenv.config();
-let productsDao, cartsDao, authorsDao
+let productsDao, cartsDao, authorsDao, messagesDao;
 
 
 switch (process.env.DB_NAME) {
@@ -21,10 +21,14 @@ switch (process.env.DB_NAME) {
             .then(({ MongoDBAuthors }) => {
                 authorsDao = new MongoDBAuthors();
             })
+        import('./chats/mongoDBMessages.js')
+            .then(({ MongoDBMessages }) => {
+                messagesDao = new MongoDBMessages();
+            })
         break;
     default:
         throw new Error("It's in default (No DB provided)");
 
 }
 
-export { productsDao, cartsDao, authorsDao };
+export { productsDao, cartsDao, authorsDao, messagesDao };

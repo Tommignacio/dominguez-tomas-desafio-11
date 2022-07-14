@@ -1,6 +1,6 @@
-import { Schema } from "mongoose";
+import mongoose from "mongoose";
 
-export const messagesSchema = new Schema({
+export const messagesSchema = new mongoose.Schema({
     autor: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "usuarios"

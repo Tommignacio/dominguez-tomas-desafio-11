@@ -5,7 +5,7 @@ export const emitData = (
     $apellido,
     $edad,
     $alias,
-    $message,
+    $mensaje,
     $email
 ) => {
     socket.emit("chatData", {
@@ -13,7 +13,17 @@ export const emitData = (
         apellido: $apellido.value,
         edad: $edad.value,
         alias: $alias.value,
-        message: $message.value,
+        mensaje: $mensaje.value,
         email: $email.value,
     });
 };
+
+//lee data de la DB
+export const readData = (callback) => {
+    socket.on("DBdata:authors", callback)
+    socket.on("DBdata:messages", callback)
+}
+
+
+
+
