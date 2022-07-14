@@ -1,5 +1,8 @@
 const socket = io.connect();
 
+//SOCKET FRONT END
+
+//emite data al servidor
 export const emitData = (
     $nombre,
     $apellido,
@@ -19,10 +22,19 @@ export const emitData = (
 };
 
 //lee data de la DB
-export const readData = (callback) => {
-    socket.on("DBdata:authors", callback)
+export const readMessages = (callback) => {
     socket.on("DBdata:messages", callback)
 }
+
+export const readAuthors = (callback) => {
+    socket.on("DBdata:authors", callback)
+}
+
+// export const readDatas = (callback) => {
+//     socket.on("DBdata:authors", callback)
+//     socket.on("DBdata:messages", callback)
+
+// }
 
 
 

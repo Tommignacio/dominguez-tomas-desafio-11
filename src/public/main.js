@@ -1,6 +1,6 @@
-import { emitData, readData } from "./socketFront.js";
+import { emitData, readMessages, readAuthors } from "./socketFront.js";
 
-//socket desde el front end
+
 const d = document;
 
 //DOM ELEMENTS
@@ -16,18 +16,67 @@ const $btnSend = d.getElementById("send");
 
 
 
-const renderChat = (data) => {
+const renderMessages = (data) => {
     console.log(data)
-    data.forEach(element => {
+    for (let i of data) {
+        // let p = d.createElement("p")
+        // p.innerText = i.nombre
         $outputChats.innerHTML += `
-                <p> ${element.nombre}</p>
-                <p> ${element.mensaje}</p>
+        <p> ${i.mensaje}</p>
                 `
-    });
+    }
+
+}
+
+
+const renderAuthors = (data) => {
+    console.log(data)
+    for (let i of data) {
+        // let p = d.createElement("p")
+        // p.innerText = i.nombre
+        $outputChats.innerHTML += `
+        <p> ${i.nombre}</p>
+                `
+    }
+
+
+}
+
+// const hola = (data, data2) => {
+//     console.log(data, data2)
+//     data.forEach(element => {
+//         console.log(element.nombre)
+//     });
+//     data2.forEach(element => {
+//         console.log(element.mensaje)
+//     });
+//     // for (let i of data) {
+//     //     console.log(i.nombre)
+//     //     console.log(i.mensaje)
+//     //     // // let p = d.createElement("p")
+//     //     // // p.innerText = i.nombre
+//     //     // $outputChats.innerHTML += `
+//     //     // <p> ${i.nombre}</p>
+//     //     // <p> ${i.mensaje}</p>
+//     //     //         `
+//     // }
+// }
+
+const renderChat = () => {
+    readAuthors(renderAuthors)
+    readMessages(renderMessages)
+    // readDatas(hola)
+    // data.forEach(element => {
+    //     $outputChats.innerHTML += `
+    //             <p> ${renderAuthors()}</p>
+    //             `
+    // });
 }
 
 d.addEventListener("DOMContentLoaded", (e) => {
-    readData(renderChat)
+
+    renderChat()
+
     d.addEventListener("submit", (e) => {
         e.preventDefault();
         $outputChats.innerHTML = ""
